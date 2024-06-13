@@ -77,7 +77,7 @@ export default function App() {
             <div>
               <h2>
                 {activeTime === -1
-                  ? "Timer Inactive"
+                  ? "Timer: Inactive"
                   : `Timer set for:  ${formatTime(activeTime * 60)}`}
               </h2>
             </div>
@@ -85,7 +85,7 @@ export default function App() {
               <h2>{timeLeft ? `Time left: ${formatTime(timeLeft)}` : ""}</h2>
             </div>
             {activeTime === -1 ? null : (
-              <button onClick={() => stopTimer()}>Stop Timer</button>
+              <button onClick={() => stopTimer()}><h2>END TIMER</h2></button>
             )}
           </aside>
         </div>
