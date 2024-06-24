@@ -5,9 +5,9 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useWithSound } from "./components/useWithSound";
 import alarmSound from "./assets/audio/alarm-clock.mp3";
-function getTimers(onClickHandler: (time: number) => void) {
+function getTimers(onClickHandler: (time: number) => void, active:number) {
   return timerConfig.map((time: number, index: number) => {
-    return <TimerButton key={index} time={time} onClick={onClickHandler} />;
+    return <TimerButton key={index} time={time} active={active === time }onClick={onClickHandler} />;
   });
 }
 function beep() {
@@ -27,8 +27,7 @@ export default function App() {
   }
   const timerSound = useWithSound(alarmSound, onSoundEnded);
   const timerAudioClass = showAlarmStopButton ? `timer-audio-visible` : `timer-audio-hidden`;
-  
-  const stopTimer = function () {
+  const reset = function() {
     clearTimeout(timer);
     setTimeLeft(0);
     setTimer(-1);
@@ -36,6 +35,10 @@ export default function App() {
     if (activeTime !== -1) {
       setActiveTime(-1);
     }
+  };
+
+  const stopTimer = function () {
+    reset();
   };
   const onStartNewTimer = function (newTime: number) {
     if (activeTime !== -1) {
@@ -48,7 +51,7 @@ export default function App() {
     setStartTime(currentTime);
   };
   const onTimerComplete = function () {
-    setActiveTime(-1);
+    reset();
     timerSound.playSound();
     setShowAlarmStopButton(true);
   };
@@ -94,11 +97,11 @@ export default function App() {
   return (
     <>
       <main>
-        <h1>React Pomodoro Timer</h1>
+        <h1 className="title">React Pomodoro Timer</h1>
         <div className="wrapper">
           <div>
             <h3>Click to set a timer</h3>
-            <section>{getTimers(onStartNewTimer)}</section>
+            <section>{getTimers(onStartNewTimer, activeTime)}</section>
           </div>
           <aside>
             <div>
@@ -112,11 +115,11 @@ export default function App() {
               <h3>{timeLeft ? `Time left: ${formatTime(timeLeft)}` : ""}</h3>
             </div>
             {activeTime === -1 ? null : (
-              <button onClick={() => stopTimer()}>
-                <h3>END TIMER</h3>
+              <button className="cancelBtn" onClick={() => stopTimer()}>
+                <h3>CANCEL TIMER</h3>
               </button>
             )}
-            <button className={timerAudioClass} onClick={onStopTimerAlarm}><h3>STOP TIMER</h3></button>
+            <button className={timerAudioClass} onClick={onStopTimerAlarm}><h3>STOP ALARM</h3></button>
           </aside>
         </div>
       </main>
