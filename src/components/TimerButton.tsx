@@ -11,7 +11,7 @@ function TimerButton({ time, onClick }: TimerButtonProps) {
         onClick(time);
       }}
     >
-      {time}
+      <h1>{time}</h1>
     </button>
   );
 }

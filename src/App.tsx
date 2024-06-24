@@ -94,29 +94,29 @@ export default function App() {
   return (
     <>
       <main>
-        <h1>React Pomodoro Timer App</h1>
+        <h1>React Pomodoro Timer</h1>
         <div className="wrapper">
           <div>
-            <h2>Click to set a timer</h2>
+            <h3>Click to set a timer</h3>
             <section>{getTimers(onStartNewTimer)}</section>
           </div>
           <aside>
             <div>
-              <h2>
+              <h3>
                 {activeTime === -1
                   ? "Timer: Inactive"
                   : `Timer set for:  ${formatTime(activeTime * 60)}`}
-              </h2>
+              </h3>
             </div>
             <div className={timeLeftStyle}>
-              <h2>{timeLeft ? `Time left: ${formatTime(timeLeft)}` : ""}</h2>
+              <h3>{timeLeft ? `Time left: ${formatTime(timeLeft)}` : ""}</h3>
             </div>
             {activeTime === -1 ? null : (
               <button onClick={() => stopTimer()}>
-                <h2>END TIMER</h2>
+                <h3>END TIMER</h3>
               </button>
             )}
-            <button className={timerAudioClass} onClick={onStopTimerAlarm}>STOP ALARM</button>
+            <button className={timerAudioClass} onClick={onStopTimerAlarm}><h3>STOP TIMER</h3></button>
           </aside>
         </div>
       </main>

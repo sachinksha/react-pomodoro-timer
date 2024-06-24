@@ -1,20 +1,23 @@
 import { useRef, useEffect } from "react";
 
 export const useWithSound = (audioSource:string, onSoundEnded:()=>void) => {
-  const soundRef = useRef();
+  const soundRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     soundRef.current = new Audio(audioSource);
     soundRef.current.addEventListener("ended",onSoundEnded);
+    soundRef.current.currentTime = 0;
   }, []);
 
   const playSound = () => {
-    soundRef.current.currentTime = 0;
-    soundRef.current.play();
+    if(soundRef.current) {
+      soundRef.current.currentTime = 0;
+      soundRef.current.play();
+    }
   };
 
   const pauseSound = () => {
-    soundRef.current.pause();
+    soundRef.current?.pause();
   };
 
   return {
