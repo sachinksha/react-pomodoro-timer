@@ -1,4 +1,8 @@
-# React + TypeScript + Vite
+# Simple Pomodoro Timer App
+![image](https://github.com/sachinksha/react-pomodoro-timer/assets/418715/1699182e-a335-4224-a882-f58193d24f2c)
+
+
+## Tech Stack - React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
